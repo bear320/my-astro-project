@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+@layer base {
+  body {
+    @apply min-h-screen;
+  }
+  main {
+    @apply mx-auto max-w-7xl;
+  }
+}
+
+@layer components {
+
+}
+
+@layer utilities {
+
+}
