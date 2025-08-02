@@ -1,5 +1,5 @@
 ---
-import Header from '@/components/Header.tsx';
+import Header from '@/components/Header.astro';
 import '@/styles/global.css';
 ---
 
@@ -12,9 +12,9 @@ import '@/styles/global.css';
     <meta name="generator" content={Astro.generator} />
     <title>Astro Basics</title>
   </head>
-  <body>
-    <Header client:only="react" />
-    <main>
+  <body class="relative">
+    <Header />
+    <main class="mx-auto my-4 w-full max-w-5xl px-4">
       <slot />
     </main>
   </body>
