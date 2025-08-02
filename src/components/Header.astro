@@ -1,0 +1,55 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const { pathname } = Astro.url;
+
+const isActive = (path: string) =>
+  pathname === path || (pathname.startsWith(path + '/') && pathname.split('/')[1] === path.replace('/', ''));
+
+const navLinks = [
+  { href: '/about', text: 'About' },
+  { href: '/products', text: 'Products' },
+  { href: '/contact', text: 'Contact' },
+];
+---
+
+<header class="sticky top-0 z-10 w-full bg-amber-50 shadow-lg">
+  <input type="checkbox" id="menu-toggle" class="peer/menu hidden" />
+
+  <div class="mx-auto flex w-full max-w-5xl items-center justify-between bg-pink-50 px-4 py-2">
+    <a href="/">
+      <img src="https://dummyimage.com/80x40/777777/ffffff&text=LOGO" alt="LOGO" />
+    </a>
+
+    <nav class="hidden lg:block">
+      {
+        navLinks.map((link) => (
+          <a href={link.href} class={`mx-2 hover:underline ${isActive(link.href) && 'font-bold underline'}`}>
+            {link.text}
+          </a>
+        ))
+      }
+    </nav>
+
+    <label for="menu-toggle" class="lg:hidden" aria-controls="mobile-menu" aria-expanded="false">
+      <Icon name="ion:menu-outline" size="24" class={`cursor-pointer lg:hidden`} />
+    </label>
+  </div>
+
+  <nav class="absolute top-full z-10 hidden w-full gap-4 bg-white px-4 py-2 shadow-lg peer-checked/menu:grid lg:hidden">
+    {navLinks.map((link) => <a href={link.href}>{link.text}</a>)}
+  </nav>
+</header>
+
+<script>
+  if (typeof window !== 'undefined') {
+    const mq = window.matchMedia('(min-width: 768px)');
+    const menuToggle = document.getElementById('menu-toggle') as HTMLInputElement;
+
+    mq.addEventListener('change', (e) => {
+      if (e.matches && menuToggle) {
+        menuToggle.checked = false;
+      }
+    });
+  }
+</script>
