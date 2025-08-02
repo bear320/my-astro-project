@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const res = await fetch('https://dummyjson.com/products').then((res) => res.json());
+---
+
+<Layout>
+  <h1>Products</h1>
+  <ul class="my-5 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    {
+      res.products.map((product: any) => (
+        <li class="block space-y-2 rounded-lg border p-4 shadow transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-lg">
+          <img src={product.images[0]} alt={product.title} class="h-48 w-full rounded object-contain" />
+          <h2>{product.title}</h2>
+          <p class="text-sm text-gray-600">{product.description}</p>
+          <span class="text-lg font-bold">${product.price}</span>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
