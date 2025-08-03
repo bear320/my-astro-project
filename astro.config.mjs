@@ -12,6 +12,15 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-
+  i18n: {
+    locales: ['en', 'zh-TW'],
+    defaultLocale: 'zh-TW',
+    fallback: {
+      en: 'zh-TW',
+    },
+    routing: {
+      fallbackType: 'rewrite',
+    },
+  },
   integrations: [react(), icon()],
 });
