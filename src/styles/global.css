@@ -1,11 +1,16 @@
 @import "tailwindcss";
+@import 'aos/dist/aos.css';
+
+:root {
+  --header-height: 56px;
+}
 
 @layer base {
   body {
     @apply min-h-screen;
   }
   main {
-    @apply mx-auto max-w-7xl;
+    @apply mx-auto max-w-7xl  min-h-[calc(100dvh-var(--header-height))];
   }
 }
 
